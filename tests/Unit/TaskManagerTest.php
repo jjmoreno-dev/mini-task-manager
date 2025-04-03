@@ -2,7 +2,11 @@
 
 namespace Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
+use App\Models\Task;
+use App\Models\Category;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class TaskManagerTest extends TestCase
 {
@@ -15,32 +19,35 @@ class TaskManagerTest extends TestCase
     {
         $this->assertTrue(true);
     }
-    public function test_attributes_are_set_correctly()
-   {
-       // create a new post instance with attributes
-       $post = new Post([
-           'title' => 'Sample Post Title',
-           'description' => 'Sample Post Description',
-           'image' => 'sample_image.jpg',
-       ]);
+    
+    public function testCreateTask()
+    {
+        Schema::disableForeignKeyConstraints();
+        DB::table('categories')->truncate();
+        Schema::enableForeignKeyConstraints();        
+        DB::table('categories')->insert([
+            [
+            'name' => 'categories test one',
+            'created_at' => date("Y-m-d H:i:s"),
+            ],
+            [
+            'name' => 'categories test two',
+            'created_at' => date("Y-m-d H:i:s"),
+            ],
+        ]);
 
-       // check if you set the attributes correctly
-       $this->assertEquals('Sample Post Title', $post->title);
-       $this->assertEquals('Sample Post Description', $post->description);
-       $this->assertEquals('sample_image.jpg', $post->image);
-   }
+        $rowCategories = \DB::select("SELECT id from categories limit 1");
 
-   public function test_non_fillable_attributes_are_not_set()
-   {
-       // Attempt to create a post with additional attributes (non-fillable)
-       $post = new Post([
-           'title' => 'Sample Post Title',
-           'description' => 'Sample Post Description',
-           'image' => 'sample_image.jpg',
-           'author' => 'John Doe',
-       ]);
+        $task = new Task();
+        $task->title = 'Title task';
+        $task->description = 'description task';
+        $task->completed = true;
+        $task->category_id = $rowCategories[0]->id;
+        $task->created_at = date("Y-m-d H:i:s");
+        $task->save();
+        $this->addToAssertionCount(1);
+    }
 
-       // check that the non-fillable attribute is not set on the post instance
-       $this->assertArrayNotHasKey('author', $post->getAttributes());
-   }
+
+
 }

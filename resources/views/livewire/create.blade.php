@@ -33,7 +33,8 @@
                           <label for="exampleFormControlInput2"
                               class="block text-gray-700 text-sm font-bold mb-2">completed:</label>
                                 <select wire:model="completed" id="completed" style="width: 100%;" class="form-control ih-medium ip-light radius-xs b-light {{ ($errors->has('category_id') ? ' is-invalid' : null) }}">                                    
-                                    <option value="0">Pending</option>
+                                <option value="">Select Option</option>    
+                                <option value="0">Pending</option>
                                     <option value="1">Completed</option>
                                 </select>
                                 
@@ -41,9 +42,9 @@
                             </div>                        
                             <div class="mb-4">
                                 <label for="exampleFormControlInput2"
-                                class="block text-gray-700 text-sm font-bold mb-2">category_id:</label>
+                                class="block text-gray-700 text-sm font-bold mb-2">category:</label>
                                 <select wire:model="category_id" id="category_id" style="width: 100%;" class="form-control ih-medium ip-light radius-xs b-light {{ ($errors->has('category_id') ? ' is-invalid' : null) }}">                                    
-                                    
+                                <option value="">Select Option</option>
                                     @if(count($category) > 0)
                                         @foreach ($category as $key => $value)
                                             <option value="{{ $value->id }}">{{ $value->name }}</option>
@@ -73,16 +74,4 @@
       </div>
   </div>
 </div>
-@push('scripts')
 
-    <script>
-        $(document).ready(function () {
-            $('#category_id').select2();
-            $('#category_id').on('change', function (e) {
-                var data = $('#category_id').select2("val");
-            @this.set('selected', data);
-            });
-        });
-    </script>
-
-@endpush

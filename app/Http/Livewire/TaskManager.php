@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Task;
 use App\Models\Category;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class TaskManager extends Component
 {
@@ -32,6 +33,7 @@ class TaskManager extends Component
         $this->description= '';
         $this->completed= '';
         $this->category_id= '';
+       
     }
 
     public function openModalPopover()
@@ -48,6 +50,8 @@ class TaskManager extends Component
     {
         $this->validate([
             'title'=>'required',
+            'completed'=>'required',
+            'category_id'=>'required',
             
         ]);
 
@@ -56,6 +60,7 @@ class TaskManager extends Component
             'description'=>$this->description,
             'completed'=>$this->completed,
             'category_id'=>$this->category_id,
+           'created_at' => date("Y-m-d H:i:s"),
         ]);
         session()->flash('message', $this->task_id ? 'task updated.' : 'task created.');
         $this->closeModalPopover();
@@ -72,6 +77,12 @@ class TaskManager extends Component
         $this->category_id = $task->category_id;
 
         $this->openModalPopover();
+    }
+    public function exportPDF()
+    {
+        $tasks = Task::all();
+        $pdf = PDF::loadView('livewire.exportPDF', ['tasks' => $tasks]);
+        return $pdf->download('task' . rand(1, 1000) . '.pdf');
     }
 
     public function delete($id)

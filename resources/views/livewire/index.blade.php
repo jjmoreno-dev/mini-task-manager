@@ -13,14 +13,30 @@
                 </div>
             </div>            
             @endif
-            <button wire:click="create()"
-                class="my-4 inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-green-700 text-base font-bold text-white shadow-sm hover:bg-gray-700">
-                Create Task
-            </button>
+            
+
+            
+            
+
+<div class="inline-flex justify-center w-full">
+  <a href="{{ route('taskmanager.pdf') }}" aria-current="page" class="px-4 py-2 text-sm font-medium text-blue-700 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
+    Generate PDF
+  </a>
+  
+  
+  <a  wire:click="create()" class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-e-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
+  Create Task
+  </a>
+</div>
+<br>
+<br>
+
+
+
             @if($isModalOpen)
             @include('livewire.create')
             @endif
-            <table class="table-fixed w-full">
+            <table id="search-table" class="table-fixed w-full">
                 <thead>
                     <tr class="bg-gray-100">
                         <th class="px-4 py-2 w-20">No.</th>
@@ -57,5 +73,6 @@
                 </tbody>
             </table>
         </div>
+        
     </div>
 </div>

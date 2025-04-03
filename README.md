@@ -18,13 +18,16 @@ Mini Gestor de Tareas (TODO)
   cd mini-task-manager
   composer install
   npm instal
-    php artisan serve
-    npm run dev
+  php artisan serve
+  npm run dev
   
-  
-```
-    
-## Related Posman
 
-[View all collections](https://www.postman.com/restless-water-503417/workspace/interfell/collection/24241606-f44624a3-0663-49d6-b8d5-07c63b395b93?action=share&creator=24241606)
+    ## User access credentials
+
+```bash
+  
+  Email:admin@softtalia.com
+  Password:password
+  
+
 

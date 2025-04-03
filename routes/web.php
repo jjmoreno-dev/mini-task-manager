@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Livewire\TaskManager;
+use App\Http\Livewire\Categorie;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,8 +18,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', TaskManager::class)->name('taskmanager');
+    Route::get('categorie', Categorie::class)->name('categorie');
     Route::get('/dashboard', TaskManager::class)->name('dashboard');
-
+    Route::get('/pdf', [TaskManager::class, 'exportPDF'])->name('taskmanager.pdf');
 });
 
 /*

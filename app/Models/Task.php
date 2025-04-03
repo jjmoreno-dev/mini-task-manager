@@ -8,12 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model
 {
     use HasFactory;
-
+    protected $table='tasks';
     protected $fillable = [
         'title',
         'description',
         'completed',
-        'category_id'
+        'category_id',
+        
     ];
     public function category()
 {
