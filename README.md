@@ -17,7 +17,7 @@ Mini Gestor de Tareas (TODO)
   git clone https://github.com/jjmoreno-dev/mini-task-manager
   cd mini-task-manager
   composer install
-  npm instal
+  npm install
   php artisan serve
   npm run dev
   
